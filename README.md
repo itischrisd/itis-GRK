@@ -11,4 +11,4 @@ The following code is distributed under the [GPLv3](./LICENSE).
 
 ---
 
-If you need some help, notice any bugs or come up with possible improvements, feel free to reach out to me and/or create a pull request. Keep in mind that some code may not be well optimized, as algorithm implamantation had to follow the variants presented during subject's lectures.
+If you need some help, notice any bugs or come up with possible improvements, feel free to reach out to me and/or create a pull request. Keep in mind that some code may not be well optimized, as algorithm implamantation had to follow requirements imposed by the course instructor.
