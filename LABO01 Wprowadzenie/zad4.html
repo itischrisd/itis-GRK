@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad4</title>
+</head>
+<body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+<script type="text/javascript">
+    function setup() {
+        createCanvas(800, 600);
+        noLoop();
+        //noprotect
+    }
+
+    function draw() {
+
+        //niebo
+        for (y = 0; y < height; y++) {
+            for (x = 0; x < width; x++) {
+                set(x, y, color(199, 201, 252));
+            }
+        }
+
+        //trawa
+        for (y = height * 2 / 3; y < height; y++) {
+            for (x = 0; x < width; x++) {
+                set(x, y, color(0, 99, 21));
+            }
+        }
+
+        //kwiaty
+        for (i = 0; i < 1000; i++) {
+            set(floor(random(0, width - 1)),
+                floor(random(height * 2 / 3, height - 1)) + 1,
+                color(random(0, 256), random(0, 256), random(0, 256)))
+        }
+
+        //fasada
+        for (y = height / 3; y <= height * 2 / 3; y++) {
+            for (x = width / 4; x < width * 3 / 4; x++) {
+                set(x, y, color(101, 49, 32));
+            }
+        }
+
+        //dach
+        x = width / 6;
+        lim_y = height / 3;
+        for (; x < width / 2 + 1; x += 2, lim_y--) {
+            for (y = height / 3; y > lim_y; y--) {
+                set(x, y, color(255, 99, 101));
+                set(x + 1, y, color(255, 99, 101));
+            }
+        }
+
+        for (; x < width * 5 / 6; x += 2, lim_y++) {
+            for (y = height / 3; y > lim_y; y--) {
+                set(x, y, color(255, 99, 101));
+                set(x + 1, y, color(255, 99, 101));
+            }
+        }
+
+        updatePixels();
+    }
+</script>
+</body>
+</html>

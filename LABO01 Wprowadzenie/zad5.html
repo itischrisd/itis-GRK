@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad5</title>
+</head>
+<body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+<script type="text/javascript">
+    var ax,
+        ay,
+        bx,
+        by,
+        cx,
+        cy,
+        ax_velocity = -1,
+        ay_velocity = 1,
+        bx_velocity = -1,
+        by_velocity = -1,
+        cx_velocity = -1,
+        cy_velocity = 1,
+        distance = 0,
+        steps = 15000,
+        down_rand = 0,
+        up_rand = 100;
+
+    function setup() {
+        createCanvas(800, 600);
+        frameRate(30);
+        ax = width / 5;
+        ay = height * 4 / 5;
+        bx = width * 4 / 5;
+        by = height * 4 / 5;
+        cx = width / 2;
+        cy = height / 5;
+        //noprotect
+    }
+
+    function draw() {
+        ax = moveCoordinate(ax, ax_velocity);
+        ay = moveCoordinate(ay, ay_velocity);
+        bx = moveCoordinate(bx, bx_velocity);
+        by = moveCoordinate(by, by_velocity);
+        cx = moveCoordinate(cx, cx_velocity);
+        cy = moveCoordinate(cy, cy_velocity);
+        reflectOnBorder();
+        distance--;
+
+        background(0);
+        stroke(256);
+
+        point(ax, ay);
+        point(bx, by);
+        point(cx, cy);
+
+        var x = ax, y = ay;
+
+        for (var i = 0; i < steps; i++) {
+            switch (floor(random(0, 3))) {
+                case 0:
+                    x = (x + ax) / 2;
+                    y = (y + ay) / 2;
+                    point(x, y);
+                    break;
+                case 1:
+                    x = (x + bx) / 2;
+                    y = (y + by) / 2;
+                    point(x, y);
+                    break;
+                default:
+                    x = (x + cx) / 2;
+                    y = (y + cy) / 2;
+                    point(x, y);
+                    break;
+            }
+        }
+        updatePixels();
+    }
+
+    function moveCoordinate(coordinate, velocity) {
+        if (distance === 0) {
+            distance = floor(random(down_rand, up_rand));
+            ax_velocity = randomSpeed() * (random() > 0.5 ? -1 : 1);
+            ay_velocity = randomSpeed() * (random() > 0.5 ? -1 : 1);
+            bx_velocity = randomSpeed() * (random() > 0.5 ? -1 : 1);
+            by_velocity = randomSpeed() * (random() > 0.5 ? -1 : 1);
+            cx_velocity = randomSpeed() * (random() > 0.5 ? -1 : 1);
+            cy_velocity = randomSpeed() * (random() > 0.5 ? -1 : 1);
+        }
+        coordinate += velocity;
+        return coordinate;
+    }
+
+    function reflectOnBorder() {
+        if (ax > width) {
+            ax = width - 1;
+            ax_velocity *= -1;
+        }
+        if (ax < 0) {
+            ax = 1;
+            ax_velocity *= -1;
+        }
+        if (ay > height) {
+            ay = height - 1;
+            ay_velocity *= -1;
+        }
+        if (ay < 0) {
+            ay = 1;
+            ay_velocity *= -1;
+        }
+        if (bx > width) {
+            bx = width - 1;
+            bx_velocity *= -1;
+        }
+        if (bx < 0) {
+            bx = 1;
+            bx_velocity *= -1;
+        }
+        if (by > height) {
+            by = height - 1;
+            by_velocity *= -1;
+        }
+        if (by < 0) {
+            by = 1;
+            by_velocity *= -1;
+        }
+        if (cx > width) {
+            cx = width - 1;
+            cx_velocity *= -1;
+        }
+        if (cx < 0) {
+            cx = 1;
+            cx_velocity *= -1;
+        }
+        if (cy > height) {
+            cy = height - 1;
+            cy_velocity *= -1;
+        }
+        if (cy < 0) {
+            cy = 1;
+            cy_velocity *= -1;
+        }
+    }
+
+    function randomSpeed() {
+        return floor(random(1, 5))
+    }
+</script>
+</body>
+</html>

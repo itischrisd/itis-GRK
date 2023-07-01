@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zad5</title>
+</head>
+<body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+<script type="text/javascript">
+    function preload() {
+        img = loadImage("https://raw.githubusercontent.com/scikit-image/scikit-image/master/skimage/data/astronaut.png");
+    }
+
+    function setup() {
+        createCanvas(256, 256);
+        img.filter('gray');
+
+        var histogram = new Array(256);
+        histogram.fill(0, 0, 256);
+
+        img.loadPixels();
+
+        for (x = 0; x < img.width; x++) {
+            for (y = 0; y < img.height; y++) {
+                pos = 4 * (y * img.width + x);
+                histogram[img.pixels[pos]]++;
+            }
+        }
+        background(256);
+        stroke(0);
+        for (i = 0; i < histogram.length; i++) {
+            histogram[i] /= Math.max.apply(null, histogram);
+            histogram[i] *= 256;
+            line(i, 256, i, 255 - histogram[i]);
+        }
+    }
+</script>
+</body>
+</html>
